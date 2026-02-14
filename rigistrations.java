@@ -73,56 +73,130 @@ public class rigistrations extends JFrame implements ActionListener {
         };
         main.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        JPanel header = createPanel(DARK, 20); header.setPreferredSize(new Dimension(800, 80)); header.setLayout(new BorderLayout());
-        JLabel title = new JLabel("STUDENT COURSE REGISTRATION"); title.setForeground(GOLD); title.setFont(new Font("Arial", Font.BOLD, 24)); title.setHorizontalAlignment(SwingConstants.CENTER);
-        JLabel sub = new JLabel("Manage Your Course Enrollments"); sub.setForeground(new Color(173, 216, 230)); sub.setFont(new Font("Arial", Font.ITALIC, 12)); sub.setHorizontalAlignment(SwingConstants.CENTER);
-        JPanel titlePanel = new JPanel(new BorderLayout()); titlePanel.setOpaque(false); titlePanel.add(title, BorderLayout.CENTER); titlePanel.add(sub, BorderLayout.SOUTH); titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel header = createPanel(DARK, 20);
+        header.setPreferredSize(new Dimension(800, 80));
+        header.setLayout(new BorderLayout());
+        JLabel title = new JLabel("STUDENT COURSE REGISTRATION"); 
+        title.setForeground(GOLD); 
+        title.setFont(new Font("Arial", Font.BOLD, 24)); 
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel sub = new JLabel("Manage Your Course Enrollments"); 
+        sub.setForeground(new Color(173, 216, 230)); 
+        sub.setFont(new Font("Arial", Font.ITALIC, 12)); 
+        sub.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel titlePanel = new JPanel(new BorderLayout()); 
+        titlePanel.setOpaque(false); 
+        titlePanel.add(title, BorderLayout.CENTER); 
+        titlePanel.add(sub, BorderLayout.SOUTH); 
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         header.add(titlePanel, BorderLayout.CENTER);
         
-        JPanel form = createPanel(LIGHT, 15); form.setLayout(new GridLayout(3, 2, 15, 15)); form.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        form.add(label("Student Name:", PURPLE)); nameField = field(); form.add(nameField);
-        form.add(label("Student ID:", PURPLE)); idField = field(); form.add(idField);
-        form.add(label("Course ID (e.g., CR100):", PURPLE)); courseField = field(); form.add(courseField);
+        JPanel form = createPanel(LIGHT, 15); 
+        form.setLayout(new GridLayout(3, 2, 15, 15)); 
+        form.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        form.add(label("Student Name:", PURPLE)); 
+        nameField = field(); form.add(nameField);
+        form.add(label("Student ID:", PURPLE)); 
+        idField = field(); form.add(idField);
+        form.add(label("Course ID (e.g., CR100):", PURPLE)); 
+        courseField = field(); form.add(courseField);
         
-        JPanel buttons = createPanel(LIGHT, 15); buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 12)); buttons.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
-        regBtn = btn("Register", new Color(34, 139, 34), 20); clrBtn = btn("Clear", new Color(220, 20, 60), 20);
+        JPanel buttons = createPanel(LIGHT, 15); 
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 12)); 
+        buttons.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
+        regBtn = btn("Register", new Color(34, 139, 34), 20); 
+        clrBtn = btn("Clear", new Color(220, 20, 60), 20);
         vwBtn = btn("View All", DARK, 20); delBtn = btn("Delete", new Color(178, 34, 34), 20);
-        buttons.add(regBtn); buttons.add(clrBtn); buttons.add(vwBtn); buttons.add(delBtn);
+        buttons.add(regBtn); 
+        buttons.add(clrBtn); 
+        buttons.add(vwBtn); 
+        buttons.add(delBtn);
         
-        JPanel list = createPanel(LIGHT, 15); list.setLayout(new BorderLayout(10, 10)); list.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        JLabel listLbl = new JLabel("Registered Students"); listLbl.setFont(new Font("Arial", Font.BOLD, 13)); listLbl.setForeground(PURPLE);
-        model = new DefaultListModel<>(); regDisplay = new JList<>(model); regDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        regDisplay.setFont(new Font("Courier New", Font.PLAIN, 11)); regDisplay.setBackground(new Color(255, 255, 240)); regDisplay.setForeground(DARK);
-        JScrollPane listScroll = new JScrollPane(regDisplay); listScroll.setBorder(new RoundedBorder(10, PURPLE));
-        list.add(listLbl, BorderLayout.NORTH); list.add(listScroll, BorderLayout.CENTER);
+        JPanel list = createPanel(LIGHT, 15); 
+        list.setLayout(new BorderLayout(10, 10)); 
+        list.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        JLabel listLbl = new JLabel("Registered Students"); 
+        listLbl.setFont(new Font("Arial", Font.BOLD, 13)); 
+        listLbl.setForeground(PURPLE);
+        model = new DefaultListModel<>();
+        regDisplay = new JList<>(model); 
+        regDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        regDisplay.setFont(new Font("Courier New", Font.PLAIN, 11)); 
+        regDisplay.setBackground(new Color(255, 255, 240)); 
+        regDisplay.setForeground(DARK);
+        JScrollPane listScroll = new JScrollPane(regDisplay);
+        listScroll.setBorder(new RoundedBorder(10, PURPLE));
+        list.add(listLbl, BorderLayout.NORTH); 
+        list.add(listScroll, BorderLayout.CENTER);
         
-        JPanel disp = createPanel(LIGHT, 15); disp.setLayout(new BorderLayout(10, 10)); disp.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        JLabel dispLbl = new JLabel("Registration Details"); dispLbl.setFont(new Font("Arial", Font.BOLD, 13)); dispLbl.setForeground(PURPLE);
-        display = new JTextArea(5, 50); display.setEditable(false); display.setFont(new Font("Courier New", Font.PLAIN, 11));
-        display.setBackground(new Color(255, 255, 240)); display.setForeground(DARK); display.setLineWrap(true); display.setWrapStyleWord(true);
-        JScrollPane dispScroll = new JScrollPane(display); dispScroll.setBorder(new RoundedBorder(10, PURPLE));
-        disp.add(dispLbl, BorderLayout.NORTH); disp.add(dispScroll, BorderLayout.CENTER);
+        JPanel disp = createPanel(LIGHT, 15); 
+        disp.setLayout(new BorderLayout(10, 10)); 
+        disp.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        JLabel dispLbl = new JLabel("Registration Details"); 
+        dispLbl.setFont(new Font("Arial", Font.BOLD, 13)); 
+        dispLbl.setForeground(PURPLE);
+        display = new JTextArea(5, 50); 
+        display.setEditable(false); 
+        display.setFont(new Font("Courier New", Font.PLAIN, 11));
+        display.setBackground(new Color(255, 255, 240)); 
+        display.setForeground(DARK); display.setLineWrap(true); 
+        display.setWrapStyleWord(true);
+        JScrollPane dispScroll = new JScrollPane(display); 
+        dispScroll.setBorder(new RoundedBorder(10, PURPLE));
+        disp.add(dispLbl, BorderLayout.NORTH); 
+        disp.add(dispScroll, BorderLayout.CENTER);
         
-        JPanel bottom = new JPanel(new GridLayout(1, 2, 15, 0)); bottom.setOpaque(false); bottom.add(list); bottom.add(disp);
-        JPanel top = new JPanel(new BorderLayout(15, 15)); top.setOpaque(false); top.add(form, BorderLayout.CENTER); top.add(buttons, BorderLayout.SOUTH);
+        JPanel bottom = new JPanel(new GridLayout(1, 2, 15, 0)); 
+        bottom.setOpaque(false);
+        bottom.add(list); 
+        bottom.add(disp);
+        JPanel top = new JPanel(new BorderLayout(15, 15)); 
+        top.setOpaque(false); 
+        top.add(form, BorderLayout.CENTER);
+        top.add(buttons, BorderLayout.SOUTH);
         
-        main.add(header, BorderLayout.NORTH); main.add(top, BorderLayout.CENTER); main.add(bottom, BorderLayout.SOUTH);
+        main.add(header, BorderLayout.NORTH); 
+        main.add(top, BorderLayout.CENTER); 
+        main.add(bottom, BorderLayout.SOUTH);
         add(main); setVisible(true);
     }
     
     private JPanel createPanel(Color bg, int r) {
-        JPanel p = new JPanel() { protected void paintComponent(Graphics g) { Graphics2D g2 = (Graphics2D)g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); g2.setColor(bg);
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), r, r); super.paintComponent(g); } };
+        JPanel p = new JPanel() { 
+            protected void paintComponent(Graphics g) { 
+                Graphics2D g2 = (Graphics2D)g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), r, r); super.paintComponent(g); 
+            }
+        };
         p.setOpaque(false); p.setBorder(new RoundedBorder(r, PURPLE)); return p;
     }
     
-    private JLabel label(String txt, Color c) { JLabel l = new JLabel(txt); l.setFont(new Font("Arial", Font.BOLD, 12)); l.setForeground(c); return l; }
-    private JTextField field() { JTextField f = new JTextField(); f.setFont(new Font("Arial", Font.PLAIN, 12)); f.setBackground(Color.WHITE);
-        f.setForeground(DARK); f.setBorder(new RoundedBorder(10, PURPLE)); f.setMargin(new Insets(8, 10, 8, 10)); return f; }
-    private JButton btn(String txt, Color bg, int r) { JButton b = new JButton(txt); b.setFont(new Font("Arial", Font.BOLD, 12)); b.setBackground(bg);
-        b.setForeground(Color.WHITE); b.setFocusPainted(false); b.setBorder(new RoundedBorder(r, bg)); b.setPreferredSize(new Dimension(120, 38));
-        b.setCursor(new Cursor(Cursor.HAND_CURSOR)); b.addActionListener(this); return b; }
+    private JLabel label(String txt, Color c) { 
+        JLabel l = new JLabel(txt); 
+        l.setFont(new Font("Arial", Font.BOLD, 12));
+        l.setForeground(c); return l;
+    }
+    private JTextField field() { 
+        JTextField f = new JTextField(); 
+        f.setFont(new Font("Arial", Font.PLAIN, 12)); 
+        f.setBackground(Color.WHITE);
+        f.setForeground(DARK); 
+        f.setBorder(new RoundedBorder(10, PURPLE)); 
+        f.setMargin(new Insets(8, 10, 8, 10));
+        return f;
+    }
+    private JButton btn(String txt, Color bg, int r) {
+        JButton b = new JButton(txt); 
+        b.setFont(new Font("Arial", Font.BOLD, 12)); 
+        b.setBackground(bg);
+        b.setForeground(Color.WHITE); 
+        b.setFocusPainted(false);
+        b.setBorder(new RoundedBorder(r, bg));
+        b.setPreferredSize(new Dimension(120, 38));
+        b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        b.addActionListener(this); return b; }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == regBtn) register();
@@ -133,11 +207,16 @@ public class rigistrations extends JFrame implements ActionListener {
     
     private void register() {
         if (nameField.getText().isEmpty() || idField.getText().isEmpty() || courseField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill all fields!", "Error", JOptionPane.ERROR_MESSAGE); return;
+            JOptionPane.showMessageDialog(this, "Please fill all fields!", "Error", JOptionPane.ERROR_MESSAGE); 
+            return;
         }
-        Registration r = new Registration(); r.setStudentName(nameField.getText()); r.setStudentId(idField.getText()); r.setCourseId(courseField.getText());
+        Registration r = new Registration(); 
+        r.setStudentName(nameField.getText()); 
+        r.setStudentId(idField.getText()); 
+        r.setCourseId(courseField.getText());
         regList.add(r); model.addElement(r.getRegistrationId() + " - " + r.getStudentName() + " (" + r.getCourseId() + ")");
-        JOptionPane.showMessageDialog(this, "Registered!\nID: " + r.getRegistrationId(), "Success", JOptionPane.INFORMATION_MESSAGE); r.displayInfo(); clear();
+        JOptionPane.showMessageDialog(this, "Registered!\nID: " + r.getRegistrationId(), "Success", JOptionPane.INFORMATION_MESSAGE);
+        r.displayInfo(); clear();
     }
     
     private void clear() { nameField.setText(""); idField.setText(""); courseField.setText(""); display.setText(""); }
@@ -162,3 +241,4 @@ public class rigistrations extends JFrame implements ActionListener {
     
     public static void main(String[] args) { } // Entry point disabled - use LOGINPAGE.java to start
 }
+
